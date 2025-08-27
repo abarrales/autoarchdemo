@@ -130,7 +130,7 @@ async def generate_terraform_code(enhanced_architecture: Dict[str, Any]) -> str:
         acumulated_data = ""
 
         bedrock_model = BedrockModel(
-            model_id="amazon.nova-pro-v1:0",
+            model_id="us.amazon.nova-pro-v1:0",
             temperature=0.1,
             max_tokens=8000
         )
