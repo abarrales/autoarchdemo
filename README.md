@@ -31,8 +31,8 @@ Si eres nuevo en AWS, esta herramienta te ayuda a:
 
 ### Instalación
 ```bash
-git clone <repository-url>
-cd AutoArchDemo
+git clone https://github.com/abarrales/autoarchdemo.git
+cd autoarchdemo
 
 # Crear entorno virtual
 python3 -m venv .venv
