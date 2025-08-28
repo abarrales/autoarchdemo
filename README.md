@@ -24,6 +24,30 @@ Si eres nuevo en AWS, esta herramienta te ayuda a:
 
 ## Instalación
 
+### Permisos necesarios
+- Amazon Bedrock (modelo Nova Pro y Claude Sonnet 4.0)
+
+### Configuración de Amazon Bedrock
+Para este taller utilizaremos Amazon Bedrock, un servicio completamente administrado que ofrece una selección de modelos fundacionales (FMs) de alto rendimiento de empresas líderes en IA como Stability AI, Anthropic y Meta, a través de una única API, junto con un amplio conjunto de capacidades que necesitas para construir aplicaciones de IA generativa con seguridad, privacidad e IA responsable.
+
+Antes de poder construir nuestros agentes, necesitamos habilitar el acceso a los modelos en nuestra cuenta.
+
+#### Acceso a Modelos
+Antes de comenzar a construir con Bedrock, necesitaremos conceder acceso a modelos para nuestra cuenta.
+
+* Inicia sesión en AWS Console y dirígete a la página de acceso a modelos de <a href="https://us-west-2.console.aws.amazon.com/bedrock/home?region=us-west-2#/" target="_blank">Amazon Bedrock</a>
+
+* Selecciona el botón "Enable specific models".
+* Selecciona las casillas de verificación listadas a continuación:
+  * Amazon (selecciona Amazon para seleccionar automáticamente todos los modelos de Amazon).
+  * Anthropic: Claude 4 Sonnet, Claude 3.7 Sonnet, Claude 3.5 Sonnet v2, Claude 3.5 Haiku
+
+* Haz clic en "Request model access" para activar los modelos en tu cuenta.
+
+Verifica que el estado de acceso al modelo sea "Access granted" para los modelos seleccionados anteriormente.
+Supervisa el estado de acceso al modelo. Puede tomar unos minutos para que los modelos pasen del estado **"In Progress"** a **"Access granted"**. Puedes usar el botón "Refresh" para verificar periódicamente las actualizaciones.
+
+
 ### Prerrequisitos
 - Python 3.8+
 - Credenciales AWS configuradas
@@ -104,10 +128,6 @@ export AWS_ACCESS_KEY_ID=tu_key
 export AWS_SECRET_ACCESS_KEY=tu_secret
 export AWS_DEFAULT_REGION=us-east-1
 ```
-
-### Permisos necesarios
-- Amazon Bedrock (modelo Nova Pro y Claude Sonnet 4.0)
-- Modo fallback disponible sin AWS
 
 ## Tecnologías
 
