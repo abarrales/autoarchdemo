@@ -66,3 +66,8 @@ generated-diagrams/
 *.tmp
 *.temp
 .cache/
+
+# Amazon Q CLI installation files
+q.zip
+q/
+*.deb

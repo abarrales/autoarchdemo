@@ -52,8 +52,23 @@ Supervisa el estado de acceso al modelo. Puede tomar unos minutos para que los m
 - Python 3.8+
 - Credenciales AWS configuradas
 - uvx instalado
+- Amazon Q CLI (opcional, para asistencia adicional)
 
-### Instalación
+### Instalación Rápida con Amazon Q CLI
+
+#### 1. Instalar Amazon Q CLI (Recomendado)
+```bash
+# Ejecutar script de instalación incluido
+./install-amazon-q-cli.sh
+```
+
+Este script automatiza la instalación de Amazon Q CLI para Ubuntu ARM64:
+- ✅ Actualiza el sistema e instala dependencias
+- ⬇️ Descarga la versión correcta para ARM64
+- 🔧 Instala automáticamente
+- 🧹 Limpia archivos temporales
+
+#### 2. Instalar la Aplicación
 ```bash
 git clone https://github.com/abarrales/autoarchdemo.git
 cd autoarchdemo
@@ -64,6 +79,15 @@ source .venv/bin/activate
 
 # Instalar dependencias
 python3 -m pip install -r requirements.txt
+```
+
+#### 3. Configurar Amazon Q CLI (Opcional)
+```bash
+# Verificar instalación
+q --version
+
+# Configurar credenciales (si deseas usar Q CLI)
+q configure
 ```
 
 ## Uso
@@ -112,9 +136,54 @@ Usa los ejemplos predefinidos en la aplicación - ¡están listos para usar!
 
 ```
 AutoArchDemo/
-├── app.py              # Aplicación principal
-├── requirements.txt    # Dependencias
-└── README.md          # Documentación
+├── app.py                      # Aplicación principal Streamlit
+├── requirements.txt            # Dependencias Python
+├── install-amazon-q-cli.sh     # Script instalación Amazon Q CLI
+├── run.sh                      # Script ejecución rápida
+└── README.md                   # Documentación
+```
+
+## Amazon Q CLI - Herramienta Adicional
+
+El script `install-amazon-q-cli.sh` instala Amazon Q Developer CLI, una herramienta que te permite:
+
+### 🤖 Capacidades de Amazon Q CLI
+- **Asistencia de código**: Genera código AWS en tiempo real
+- **Preguntas técnicas**: Responde dudas sobre servicios AWS
+- **Mejores prácticas**: Sugiere optimizaciones y patrones
+- **Debugging**: Ayuda a resolver errores comunes
+
+### 📋 Uso del Script de Instalación
+
+```bash
+# Hacer ejecutable (si es necesario)
+chmod +x install-amazon-q-cli.sh
+
+# Ejecutar instalación
+./install-amazon-q-cli.sh
+```
+
+**¿Qué hace el script?**
+1. 📦 Actualiza Ubuntu e instala `curl` y `unzip`
+2. ⬇️ Descarga Amazon Q CLI para arquitectura ARM64
+3. 📂 Extrae y ejecuta el instalador oficial
+4. 🧹 Limpia archivos temporales automáticamente
+5. ✅ Confirma instalación exitosa
+
+### 🚀 Comandos Útiles de Q CLI
+
+```bash
+# Verificar instalación
+q --version
+
+# Hacer preguntas sobre AWS
+q ask "¿Cómo crear un bucket S3 con Terraform?"
+
+# Generar código
+q generate "función Lambda para procesar S3 events"
+
+# Obtener ayuda
+q --help
 ```
 
 ## Configuración AWS
