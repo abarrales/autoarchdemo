@@ -2,15 +2,17 @@ import streamlit as st
 import streamlit.components.v1
 import json
 from typing import Dict, Any
-from strands import Agent
+from strands import Agent, tool
 from mcp import stdio_client, StdioServerParameters
 from strands.tools.mcp import MCPClient
+from strands_tools import image_reader
 from strands.models import BedrockModel
 
 import asyncio
 import nest_asyncio
 nest_asyncio.apply()
 
+import tempfile
 
 # Configuración de la página
 st.set_page_config(
@@ -19,21 +21,36 @@ st.set_page_config(
     layout="wide"
 )
 
-async def enhance_architecture(description: str) -> Dict[str, Any]:
+async def enhance_architecture(description: str, image_file=None) -> Dict[str, Any]:
     """Mejora descripción usando Strands Agent inline"""
     try:
         my_msg = st.empty()
         acumulated_data = ""
         
-        # Agent inline
+        # Agent con modelo multimodal
         agent = Agent(
-            system_prompt="""Eres un arquitecto AWS experto. CRITICAL: Return only the JSON data without code block formatting:
+            tools=[image_reader],
+            system_prompt="""Eres un arquitecto AWS experto. Puedes recibir una imagen o una descripcion de la solución, analízala detalladamente identificando todos los componentes y servicios y genera solo el JSON con el siguiente formato:
             {"enhanced_description": "...", "aws_services": [{"service": "...", "purpose": "..."}], 
-                "data_flow": "...", "security_considerations": "..."}""",
+                "data_flow": "...", "security_considerations": "..."}
+                 MOST CRITICAL: respond with raw JSON only. No markdown, no explanations. No code block formatting""",
                 callback_handler=None
         )
 
-        async for event in agent.stream_async(f"Analiza y mejora esta arquitectura: {description}"):
+        user_prompt = f"Analiza y mejora esta arquitectura: {description}"
+
+        # Si hay imagen, procesarla como archivo temporal para utilizar la tool del Agente image_reader
+        if image_file:
+            st.image(image_file, caption="Imagen de arquitectura cargada", width=300)
+            ext_map = {'image/png': '.png', 'image/jpeg': '.jpg', 'image/jpg': '.jpg'}
+            file_ext = ext_map.get(image_file.type, '.png')
+            with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext) as tmp_file:
+                tmp_file.write(image_file.read())
+                tmp_filepath = tmp_file.name
+            user_prompt = f"Analiza la arquitectura en la imagen: {tmp_filepath}"
+            
+        # Ejecutamos Agente y enviamos Stream de analisis de descripción o de imagen de Arquitectura
+        async for event in agent.stream_async(user_prompt):
             if "data" in event:
                 acumulated_data += event['data']
                 my_msg.code(acumulated_data, language="json", height=250, wrap_lines=True)
@@ -187,16 +204,19 @@ async def main():
     selected = st.selectbox("Ejemplos:", ["Personalizado"] + list(examples.keys()))
     default_text = examples.get(selected, "")
     
+    # Opción de imagen
+    uploaded_file = st.file_uploader("📷 O sube una imagen de arquitectura:", type=['png', 'jpg', 'jpeg'])
+    
     user_description = st.text_area(
         "Describe tu arquitectura:",
-        value=default_text,
+        value=default_text if not uploaded_file else "Analiza esta imagen de arquitectura y describe los componentes, servicios AWS y flujo de datos que observas",
         height=100
     )
     
     if st.button("🚀 Mejorar Arquitectura", type="primary"):
         if user_description:
             with st.spinner("🤖 Mejorando arquitectura..."):
-                enhanced = await enhance_architecture(user_description)
+                enhanced = await enhance_architecture(user_description, uploaded_file)
                 st.session_state.result = enhanced
           
     

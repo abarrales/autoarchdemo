@@ -54,21 +54,7 @@ Supervisa el estado de acceso al modelo. Puede tomar unos minutos para que los m
 - uvx instalado
 - Amazon Q CLI (opcional, para asistencia adicional)
 
-### Instalación Rápida con Amazon Q CLI
-
-#### 1. Instalar Amazon Q CLI (Recomendado)
-```bash
-# Ejecutar script de instalación incluido
-./install-amazon-q-cli.sh
-```
-
-Este script automatiza la instalación de Amazon Q CLI para Ubuntu ARM64:
-- ✅ Actualiza el sistema e instala dependencias
-- ⬇️ Descarga la versión correcta para ARM64
-- 🔧 Instala automáticamente
-- 🧹 Limpia archivos temporales
-
-#### 2. Instalar la Aplicación
+#### 1. Instalar la Aplicación
 ```bash
 git clone https://github.com/abarrales/autoarchdemo.git
 cd autoarchdemo
@@ -80,6 +66,20 @@ source .venv/bin/activate
 # Instalar dependencias
 python3 -m pip install -r requirements.txt
 ```
+
+### Instalación Rápida con Amazon Q CLI
+
+#### 2. Instalar Amazon Q CLI (Recomendado)
+```bash
+# Ejecutar script de instalación incluido
+./install-amazon-q-cli.sh
+```
+
+Este script automatiza la instalación de Amazon Q CLI para Ubuntu ARM64:
+- ✅ Actualiza el sistema e instala dependencias
+- ⬇️ Descarga la versión correcta para ARM64
+- 🔧 Instala automáticamente
+- 🧹 Limpia archivos temporales
 
 #### 3. Configurar Amazon Q CLI (Opcional)
 ```bash

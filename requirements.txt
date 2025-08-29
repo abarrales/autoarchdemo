@@ -1,4 +1,5 @@
 streamlit
 boto3
 strands-agents
+strands-agents-tools
 nest-asyncio
