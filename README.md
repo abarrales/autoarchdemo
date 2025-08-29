@@ -212,6 +212,54 @@ export AWS_DEFAULT_REGION=us-east-1
 - **Error Python**: Instala Python 3.8+
 - **Interfaz**: Actualiza navegador o usa incógnito
 
+### Error 413 - Request Entity Too Large
+
+**Problema**: Al subir imágenes grandes (>1MB) aparece el error:
+```
+AxiosError: Request failed with status code 413
+```
+
+**Causa**: Nginx tiene un límite por defecto de 1MB para uploads.
+
+#### Solución Automática (Recomendada)
+
+Usa el script incluido que automatiza la configuración:
+
+```bash
+# Ejecutar script de solución
+./fix-nginx-upload.sh
+```
+
+**¿Cuándo usar este script?**
+- Cuando obtienes error 413 al subir imágenes
+- En servidores con Nginx como proxy reverso
+- Para permitir uploads hasta 10MB
+
+#### Solución Manual
+
+Si prefieres hacerlo manualmente:
+
+1. **Editar configuración de Nginx**:
+   ```bash
+   sudo vi /etc/nginx/nginx.conf
+   ```
+
+2. **Agregar en la sección `http`**:
+   ```nginx
+   http {
+       ...
+       client_max_body_size 10M;  # Permite uploads hasta 10MB
+       ...
+   }
+   ```
+
+3. **Recargar Nginx**:
+   ```bash
+   sudo nginx -s reload
+   ```
+
+**Verificación**: Después de aplicar la solución, deberías poder subir imágenes PNG de hasta 10MB sin problemas.
+
 ## Contribuir
 
 1. Fork el proyecto

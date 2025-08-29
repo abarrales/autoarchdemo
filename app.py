@@ -47,10 +47,10 @@ async def enhance_architecture(description: str, image_file=None) -> Dict[str, A
             with tempfile.NamedTemporaryFile(delete=False, suffix=file_ext) as tmp_file:
                 tmp_file.write(image_file.read())
                 tmp_filepath = tmp_file.name
-            user_prompt = f"Analiza la arquitectura en la imagen: {tmp_filepath}"
+            user_prompt = f"Analiza la arquitectura en la imagen: {tmp_filepath} {description}"
             
         # Ejecutamos Agente y enviamos Stream de analisis de descripción o de imagen de Arquitectura
-        async for event in agent.stream_async(user_prompt):
+        async for event in agent.stream_async(f"{user_prompt}"):
             if "data" in event:
                 acumulated_data += event['data']
                 my_msg.code(acumulated_data, language="json", height=250, wrap_lines=True)
