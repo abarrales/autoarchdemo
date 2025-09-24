@@ -123,12 +123,9 @@ use awslabs.cdk-mcp-server@latest
 3. **Agente para estimación de costos**: escribe el siguiente prompt.
 
 ```
-Update @app.py to create an Strands Agent connecting to the AWS Pricing MCP server
-once the terraform code generation finishes automatically run
-cost estimation and use terraform code generated as input source 
-displays an engaging visual cost report as a markdown report
-CRITICAL: use these specific tools: get_pricing_from_web and generate_cost_report
-you can look at the other part of the file to get an idea how it works. This is the MCP Server we will 
+Update @app.py to create an Strands Agent connecting to the AWS CDK MCP server, 
+displays an engaging visual cost report as a markdown report, 
+you can look at the other files to get an idea how it works. This is the MCP Server we will 
 use awslabs.aws-pricing-mcp-server@latest
 ```
 
