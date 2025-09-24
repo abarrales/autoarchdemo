@@ -113,9 +113,9 @@ Plataforma de comercio electrónico con alta disponibilidad
 1. **Usando Q Dev:** escribe el siguiente prompt.
 
 ```
-Update @app.py to create an Strands Agent connecting to the AWS Pricing MCP server that generate a cost report 
-this will automatically run after terraform code generation finishes then process 
-the terraform template as input source for cost estimations
+Update @app.py to create an Strands Agent connecting to the AWS Pricing MCP server
+once the terraform code generation finishes automatically run
+cost estimation and use terraform code generated as input source 
 CRITICAL: use these specific tools: get_pricing_from_web and generate_cost_report
 you can look at the other part of the file to get an idea how it works. This is the MCP Server we will 
 use awslabs.aws-pricing-mcp-server@latest
