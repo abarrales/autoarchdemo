@@ -125,6 +125,7 @@ use awslabs.cdk-mcp-server@latest
 ```
 Update @app.py to create an Strands Agent connecting to the AWS CDK MCP server, 
 displays an engaging visual cost report as a markdown report, 
+perform an Infrastructure project analysis and provide Detailed cost report generation
 you can look at the other files to get an idea how it works. This is the MCP Server we will 
 use awslabs.aws-pricing-mcp-server@latest
 ```
