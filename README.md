@@ -110,16 +110,30 @@ Plataforma de comercio electrónico con alta disponibilidad
 ```
 
 ### Crea una nueva funcionalidad
-1. **Usando Q Dev:** escribe el siguiente prompt.
+1. **Usando Q Dev:** 
+
+2. **Agente para generar codigo CDK**: escribe el siguiente prompt.
+
+```
+Update @app.py to create an Strands Agent connecting to the AWS CDK MCP server, 
+you can look at the other files to get an idea how it works. This is the MCP Server we will 
+use awslabs.cdk-mcp-server@latest
+```
+
+3. **Agente para estimación de costos**: escribe el siguiente prompt.
 
 ```
 Update @app.py to create an Strands Agent connecting to the AWS Pricing MCP server
 once the terraform code generation finishes automatically run
 cost estimation and use terraform code generated as input source 
+displays an engaging visual cost report as a markdown report
 CRITICAL: use these specific tools: get_pricing_from_web and generate_cost_report
 you can look at the other part of the file to get an idea how it works. This is the MCP Server we will 
 use awslabs.aws-pricing-mcp-server@latest
 ```
+
+
+
 
 ### ¿No sabes qué escribir?
 Usa los ejemplos predefinidos en la aplicación - ¡están listos para usar!
