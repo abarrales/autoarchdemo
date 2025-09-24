@@ -109,6 +109,18 @@ Una aplicación web simple con base de datos y almacenamiento de imágenes
 Plataforma de comercio electrónico con alta disponibilidad
 ```
 
+### Crea una nueva funcionalidad
+1. **Usando Q Dev:** escribe el siguiente prompt.
+
+```
+Update @app.py to create an Strands Agent connecting to the AWS Pricing MCP server that generate a cost report 
+this will automatically run after terraform code generation finishes then process 
+the terraform template as input source for cost estimations
+CRITICAL: use these specific tools: get_pricing_from_web and generate_cost_report
+you can look at the other part of the file to get an idea how it works. This is the MCP Server we will 
+use awslabs.aws-pricing-mcp-server@latest
+```
+
 ### ¿No sabes qué escribir?
 Usa los ejemplos predefinidos en la aplicación - ¡están listos para usar!
 
